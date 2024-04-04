@@ -3,7 +3,6 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 from datetime import datetime
 
-# Read the CSV file into a DataFrame
 CSV_FILE_PATH = "Melbourne_housing.csv"
 df = pd.read_csv(CSV_FILE_PATH, delimiter=',')
 
