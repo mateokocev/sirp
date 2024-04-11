@@ -1,0 +1,31 @@
+dbms,TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,ORDINAL_POSITION,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,CONSTRAINT_TYPE,REFERENCED_TABLE_SCHEMA,REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+mysql,melhouse,house_details,bathroom,6,float,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,house_details,bedroom,5,float,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,house_details,car,7,float,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,house_details,id,1,int,NULL,"PRIMARY KEY",NULL,NULL,NULL
+mysql,melhouse,house_details,property_id,2,int,NULL,"FOREIGN KEY",melhouse,property,id
+mysql,melhouse,house_details,rooms,3,int,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,house_details,type,4,varchar,1,NULL,NULL,NULL,NULL
+mysql,melhouse,location,CouncilArea,4,varchar,100,NULL,NULL,NULL,NULL
+mysql,melhouse,location,id,1,int,NULL,"PRIMARY KEY",NULL,NULL,NULL
+mysql,melhouse,location,latitude,6,float,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,location,longitude,7,float,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,location,postcode,3,int,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,location,regionname,5,varchar,100,NULL,NULL,NULL,NULL
+mysql,melhouse,location,suburb,2,varchar,100,NULL,NULL,NULL,NULL
+mysql,melhouse,property,address,3,varchar,90,NULL,NULL,NULL,NULL
+mysql,melhouse,property,buildingArea,5,varchar,50,NULL,NULL,NULL,NULL
+mysql,melhouse,property,id,1,int,NULL,"PRIMARY KEY",NULL,NULL,NULL
+mysql,melhouse,property,landsize,4,int,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,property,location_id,2,int,NULL,"FOREIGN KEY",melhouse,location,id
+mysql,melhouse,property,parking_area,8,varchar,50,NULL,NULL,NULL,NULL
+mysql,melhouse,property,propertycount,7,int,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,property,yearBuilt,6,varchar,50,NULL,NULL,NULL,NULL
+mysql,melhouse,sale,dateOfSale,4,date,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,sale,id,1,int,NULL,"PRIMARY KEY",NULL,NULL,NULL
+mysql,melhouse,sale,method,5,varchar,2,NULL,NULL,NULL,NULL
+mysql,melhouse,sale,price,6,int,NULL,NULL,NULL,NULL,NULL
+mysql,melhouse,sale,property_id,2,int,NULL,"FOREIGN KEY",melhouse,property,id
+mysql,melhouse,sale,seller_id,3,int,NULL,"FOREIGN KEY",melhouse,seller,id
+mysql,melhouse,seller,id,1,int,NULL,"PRIMARY KEY",NULL,NULL,NULL
+mysql,melhouse,seller,seller_name,2,varchar,100,NULL,NULL,NULL,NULL
