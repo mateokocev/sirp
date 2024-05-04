@@ -520,16 +520,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique rows</from>
-      <to>CPython Script Executor</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>CPython Script Executor</from>
-      <to>Add sequence</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Add sequence</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
@@ -554,7 +544,47 @@
       <to>Dimension lookup/update</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Unique rows</from>
+      <to>Add sequence</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>id</valuename>
+    <use_database>N</use_database>
+    <connection>MELHOUSE-PENTAHO</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>10000</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>CSV file input</name>
     <type>CsvInput</type>
@@ -839,6 +869,93 @@
     </GUI>
   </step>
   <step>
+    <name>Dimension lookup/update</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>MELHOUSE_DDL</schema>
+    <table>dim_location</table>
+    <connection>MELHOUSE-PENTAHO</connection>
+    <commit>100</commit>
+    <update>Y</update>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <field>
+        <name>suburb</name>
+        <lookup>Suburb</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>postcode</name>
+        <lookup>Postcode</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>CouncilArea</name>
+        <lookup>CouncilArea</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>regionname</name>
+        <lookup>Regionname</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>latitude</name>
+        <lookup>Latitude</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>longitude</name>
+        <lookup>Longitude</lookup>
+        <update>Insert</update>
+      </field>
+      <return>
+        <name>location_tk</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
@@ -851,7 +968,22 @@
     </partitioning>
     <fields>
       <field>
-        <name>SellerG</name>
+        <name>Suburb</name>
+      </field>
+      <field>
+        <name>Postcode</name>
+      </field>
+      <field>
+        <name>CouncilArea</name>
+      </field>
+      <field>
+        <name>Regionname</name>
+      </field>
+      <field>
+        <name>Latitude</name>
+      </field>
+      <field>
+        <name>Longitude</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -865,6 +997,55 @@
     </remotesteps>
     <GUI>
       <xloc>288</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>Suburb</name>
+      </field>
+      <field>
+        <name>Postcode</name>
+      </field>
+      <field>
+        <name>CouncilArea</name>
+      </field>
+      <field>
+        <name>Regionname</name>
+      </field>
+      <field>
+        <name>Latitude</name>
+      </field>
+      <field>
+        <name>Longitude</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -931,7 +1112,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>SellerG</name>
+        <name>Postcode</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -950,6 +1131,37 @@
     <GUI>
       <xloc>368</xloc>
       <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sorted merge</name>
+    <type>SortedMerge</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <ascending>Y</ascending>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1174,7 +1386,7 @@ FROM melhouse.location cy</sql>
     <error_description/>
     <fields>
       <field>
-        <name>SellerG</name>
+        <name>Suburb</name>
         <case_insensitive>N</case_insensitive>
       </field>
     </fields>
@@ -1193,137 +1405,6 @@ FROM melhouse.location cy</sql>
     </GUI>
   </step>
   <step>
-    <name>CPython Script Executor</name>
-    <type>CPythonScriptExecutor</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <rows_to_process>ALL</rows_to_process>
-    <rows_to_process_size/>
-    <reservoir_sampling>N</reservoir_sampling>
-    <reservoir_sampling_size/>
-    <reservoir_sampling_seed>1</reservoir_sampling_seed>
-    <include_input_as_output>N</include_input_as_output>
-    <py_script># python script</py_script>
-    <load_script_at_runtime>N</load_script_at_runtime>
-    <script_to_load/>
-    <continue_on_unset_vars>N</continue_on_unset_vars>
-    <py_vars_to_get/>
-    <include_frame_row_index>N</include_frame_row_index>
-    <frame_names>
-    </frame_names>
-    <incoming_step_names>
-   </incoming_step_names>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>valuename</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sorted merge</name>
-    <type>SortedMerge</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Unique rows 2</name>
     <type>Unique</type>
     <description/>
@@ -1338,60 +1419,12 @@ FROM melhouse.location cy</sql>
     <count_field/>
     <reject_duplicate_row>N</reject_duplicate_row>
     <error_description/>
-    <fields>      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dimension lookup/update</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema/>
-    <table>dim table name</table>
-    <connection/>
-    <commit>100</commit>
-    <update>Y</update>
     <fields>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <return>
-        <name/>
-        <rename/>
-        <creation_method/>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
+      <field>
+        <name>suburb</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
     </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1402,7 +1435,7 @@ FROM melhouse.location cy</sql>
     </remotesteps>
     <GUI>
       <xloc>976</xloc>
-      <yloc>224</yloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
