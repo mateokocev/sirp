@@ -502,7 +502,7 @@
     <hop>
       <from>Table input</from>
       <to>Sort Location</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Select values</from>
@@ -1160,7 +1160,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>880</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1422,7 +1422,7 @@ FROM melhouse.location cy</sql>
     <fields>
       <field>
         <name>suburb</name>
-        <case_insensitive>N</case_insensitive>
+        <case_insensitive>Y</case_insensitive>
       </field>
     </fields>
     <attributes/>
@@ -1435,7 +1435,7 @@ FROM melhouse.location cy</sql>
     </remotesteps>
     <GUI>
       <xloc>976</xloc>
-      <yloc>96</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
