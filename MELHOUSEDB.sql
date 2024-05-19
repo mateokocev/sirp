@@ -13,4 +13,5 @@ SELECT * FROM sale;
 DROP DATABASE IF EXISTS MELHOUSE_DDL;
 CREATE DATABASE MELHOUSE_DDL;
 USE MELHOUSE_DDL;
-SELECT * FROM seller_dim;
+select * from fact_dim;
+select * from seller_dim;
