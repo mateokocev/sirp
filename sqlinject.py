@@ -66,7 +66,6 @@ def convert_date(date_str):
     return datetime.strptime(date_str, '%d/%m/%Y')
 
 for index, row in df.iterrows():
-    # Create Location record
 
     location = Location(suburb=row['Suburb'],
                         postcode=row['Postcode'],
@@ -111,4 +110,4 @@ for index, row in df.iterrows():
 
 session.commit()
 session.close()
-print("Tables have been filled.")
+print("Tablice su popunjene.")
